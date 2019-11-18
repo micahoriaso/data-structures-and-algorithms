@@ -14,44 +14,87 @@ class LinkedList {
         this.size = 0;
     }
 
+    /*
+        case 1
+        head ===> null ====> tail (null)
+        head ===> | 3 | ====> tail (null)
+
+        case 2
+        head ===> | 3 | ====> tail (null)
+        head ===> | 2 | <===> | 3 | ===> tail (null)
+    */
     addFirst = node => {
 
         const tempNode = this.head;
-
         this.head = node;
-        this.head.next = tempNode;
-        
-        if (this.size === 0) {
-            this.tail = this.head
+        this.size ++;
+         
+        if(this.size === 1) {
+            this.tail = this.head;
         } else {
-            tempNode.previous = this.head
+            this.head.next = tempNode;
+            this.head.next.previous = this.head;
         }
-        
-        this.size++;
     }
 
+
+    /*
+        case 1
+        head ===> null ====> tail (null)
+        head ===> | 3 | ====> tail (null)
+
+        case 2
+        head ===> | 3 | ====> tail (null)
+        head ===> | 3 | <===> | 2 | ===> tail (null)
+    */
     addLast = node => {
 
-        this.size === 0 ? this.head = node : this.tail.next = node;
-        node.previous = this.tail;
+        this.size === 0 ? this.head = this.tail = node : this.tail.next = node;
+        this.tail.next = node;
+        node.previous = this.tail; // intially missed this
         this.tail = node;
+        this.size ++;
 
     }
 
+    /*
+        case 1
+        head ===> null ===> tail (null)
+
+        case 2
+        head ===> | 3 | ===> tail (null)
+        head ===> null ===> tail (null)
+
+        case 3
+        head ===> | 2 | <===> | 3 | ===> tail (null)
+        head ===============> | 3 | ===> tail (null)
+    */
     removeFirst = () => {
 
         if (this.size === 0) return;
         this.head = this.head.next;
-        this.size--;
+        this.size --;
 
         if (this.size === 0) {
             this.tail = null;
         } else {
-            this.head.previous = null;
+            this.head.previous = null; //reset previous to null
         }
  
     }
 
+    /*
+        case 1
+        head ===> null ===> tail (null)
+
+        case 2
+        head ===> | 3 | ===> tail (null)
+        head ===> null ===> tail (null)
+
+        case 3
+        head ===> | 2 | <===> | 3 | ===> tail (null)
+        head ===> | 2 | ===============> tail (null)
+    */
     removeLast = () => {
         if (this.size === 0) return;
         if (this.size === 1) this.head = this.tail = null;
@@ -59,11 +102,66 @@ class LinkedList {
             this.tail = this.tail.previous;
             this.tail.next =  null;
         }
-        this.size--;
+        this.size --;
 
     }
 
-    enumarate = () => {
+    /*
+        case 1
+        head ===> null ===> tail (null)
+
+        case 2
+        head ===> | 3 | ===> tail (null)
+        head ===> null ===> tail (null)
+
+        case 3
+        head ===> | 2 | <===> | 3 | ===> tail (null)
+        head ===> | 2 | ===============> tail (null)
+
+        case 4
+        head ===> | 2 | <===> | 3 | <===> | 4 | ===> tail (null)
+        head ===============> | 3 | <===> | 4 | ===> tail (null)
+
+        case 5
+        head ===> | 2 | <===> | 3 | <===> | 4 | ===> tail (null)
+        head ===> | 2 | <===============> | 4 | ===> tail (null)
+    */
+    removeByValue = node => {
+
+        // case 1
+        if (this.size === 0) return;
+
+        if (this.size === 1) {
+            // case 2
+            if (this.head.value === node.value) this.head = this.tail = null;
+            this.size --;
+
+        } else {
+            let current = this.head;
+            let prevNode = null
+            while (current) {
+                if (current.value === node.value) {
+                    // case 4
+                    if (!prevNode) {
+                        current.next.previous = null;
+                        this.head = current.next
+                    }
+                    else {
+                        // case 5
+                        current.next.previous = prevNode
+                        prevNode.next = current.next;
+                        this.size--;
+                    }
+
+                }
+                prevNode = current;
+                current = current.next;
+            }
+        }
+
+    }
+
+    enumerate = () => {
 
         if (this.size === 0) return;
 
@@ -84,13 +182,16 @@ class LinkedList {
 const node1 = new Node(10);
 const node2 = new Node(11);
 const node3 = new Node(12)
+const node4 = new Node(13)
 
 const myList = new LinkedList();
 
 myList.addFirst(node1);
-myList.addLast(node2);
 myList.addFirst(node3);
+myList.addLast(node2);
+myList.addLast(node4);
 
-myList.removeFirst();
+// myList.removeFirst();
 
-console.log(myList.enumarate());
+console.log('Node list: ', myList.enumerate());
+console.log('Size: ', myList.size);
