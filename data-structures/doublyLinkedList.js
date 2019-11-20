@@ -1,4 +1,4 @@
-class Node {
+export class Node {
     constructor(value) {
         this.value = value;
         this.next = null;
@@ -6,7 +6,7 @@ class Node {
     }
 }
 
-class LinkedList {
+export class LinkedList {
 
     constructor() {
         this.head = null;
@@ -178,20 +178,3 @@ class LinkedList {
     }
 
 }
-
-const node1 = new Node(10);
-const node2 = new Node(11);
-const node3 = new Node(12)
-const node4 = new Node(13)
-
-const myList = new LinkedList();
-
-myList.addFirst(node1);
-myList.addFirst(node3);
-myList.addLast(node2);
-myList.addLast(node4);
-
-// myList.removeFirst();
-
-console.log('Node list: ', myList.enumerate());
-console.log('Size: ', myList.size);

@@ -1,4 +1,4 @@
-class Node {
+export class Node {
     constructor(value)
     {
         this.value = value;
@@ -6,7 +6,7 @@ class Node {
     }
 }
 
-class LinkedList {
+export class LinkedList {
 
     /*
         The head, tail and size are properties of the linked list not the node chain.
@@ -91,16 +91,25 @@ class LinkedList {
         head ===> | 2 | ===> tail (null)
     */
     removeLast = () => {
+
         if (this.size === 0) return;
+
         if (this.size === 1) this.head = this.tail = null 
         else {
+
+            let tempNode;
             let current = this.head;
+
             while (current.next) {
+
+                tempNode = current;
                 current = current.next;
+
             }
 
-            current.next = null;
-            this.tail = current;
+            this.tail = tempNode;
+            this.tail.next = null;
+
         }
         this.size --;
 
@@ -177,24 +186,3 @@ class LinkedList {
     }
 
 }
-
-const node1 = new Node(10);
-const node2 = new Node(11);
-const node3 = new Node(12)
-const node4 = new Node(13)
-const node5 = new Node(10)
-
-const myList = new LinkedList();
-
-myList.addFirst(node1);
-myList.addLast(node2);
-myList.addFirst(node3);
-myList.addLast(node4);
-myList.addLast(node5);
-
-// myList.removeFirst();
-
-myList.removeByValue(node1);
-
-console.log('node list: ', myList.enumerate());
-console.log('size:', myList.size);
