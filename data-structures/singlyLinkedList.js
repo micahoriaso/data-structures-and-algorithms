@@ -28,7 +28,9 @@ export class LinkedList {
         head ===> | 3 | ===> tail (null)
         head ===> | 2 | ===> | 3 | ===> tail (null)
     */
-    addFirst = node => {
+    addFirst = value => {
+
+        const node = new Node(value);
 
         const tempNode = this.head;
 
@@ -49,7 +51,9 @@ export class LinkedList {
         head ===> | 3 | ===> tail (null)
         head ===> | 3 | ===> | 2 | ===> tail (null)
     */
-    addLast = node => {
+    addLast = value => {
+
+        const node = new Node(value);
 
         this.size === 0 ? this.head = node : this.tail.next = node;
         this.tail = node;
@@ -135,7 +139,9 @@ export class LinkedList {
         head ===> | 2 | ===> | 3 | ===> | 4 | ===> tail (null)
         head ===> | 2 | ===> | 4 | ===> tail (null)
     */
-    removeByValue = node => {
+    removeByValue = value => {
+
+        const node = new Node(value);
 
         // case 1
         if (this.size === 0) return;

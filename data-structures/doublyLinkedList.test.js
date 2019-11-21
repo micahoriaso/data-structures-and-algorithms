@@ -17,12 +17,11 @@ test("creates a node", () => {
 test("adds a new node to the beginning of the linked list", () => {
 
   const list = new LinkedList();
-  const node = new Node(1);
 
-  list.addFirst(node);
+  list.addFirst(1);
 
-  expect(list.head).toEqual(node);
-  expect(list.tail).toEqual(node);
+  expect(list.head.value).toEqual(1);
+  expect(list.tail.value).toEqual(1);
   expect(list.size).toEqual(1);
 
 });
@@ -30,14 +29,12 @@ test("adds a new node to the beginning of the linked list", () => {
 test("adds a new node to the end of the linked list", () => {
 
   const list = new LinkedList();
-  const node = new Node(1);
-  const node2 = new Node(2);
 
-  list.addFirst(node);
-  list.addLast(node2);
+  list.addFirst(1);
+  list.addLast(2);
 
-  expect(list.head).toEqual(node);
-  expect(list.tail).toEqual(node2);
+  expect(list.head.value).toEqual(1);
+  expect(list.tail.value).toEqual(2);
   expect(list.size).toEqual(2);
 
 });
@@ -45,17 +42,14 @@ test("adds a new node to the end of the linked list", () => {
 test("removes a node to the beginning of the linked list", () => {
 
   const list = new LinkedList();
-  const node = new Node(1);
-  const node2 = new Node(2);
-  const node3 = new Node(3);
 
-  list.addFirst(node);
-  list.addLast(node2);
-  list.addLast(node3);
+  list.addFirst(1);
+  list.addLast(2);
+  list.addLast(3);
   list.removeFirst();
 
-  expect(list.head).toEqual(node2);
-  expect(list.tail).toEqual(node3);
+  expect(list.head.value).toEqual(2);
+  expect(list.tail.value).toEqual(3);
   expect(list.size).toEqual(2);
 
 });
@@ -63,17 +57,14 @@ test("removes a node to the beginning of the linked list", () => {
 test("removes a node to the end of the linked list", () => {
 
   const list = new LinkedList();
-  const node = new Node(1);
-  const node2 = new Node(2);
-  const node3 = new Node(3);
 
-  list.addFirst(node);
-  list.addLast(node2);
-  list.addLast(node3);
+  list.addFirst(1);
+  list.addLast(2);
+  list.addLast(3);
   list.removeLast();
 
-  expect(list.head).toEqual(node);
-  expect(list.tail).toEqual(node2);
+  expect(list.head.value).toEqual(1);
+  expect(list.tail.value).toEqual(2);
   expect(list.size).toEqual(2);
 
 });
@@ -81,15 +72,12 @@ test("removes a node to the end of the linked list", () => {
 test("removes a node by its value", () => {
 
   const list = new LinkedList();
-  const node = new Node(1);
-  const node2 = new Node(2);
-  const node3 = new Node(3);
 
-  list.addFirst(node);
-  list.addLast(node2);
-  list.addLast(node3);
-  list.removeByValue(node2);
+  list.addFirst(1);
+  list.addLast(2);
+  list.addLast(3);
+  list.removeByValue(2);
 
   expect(list.size).toEqual(2);
-  
+
 });

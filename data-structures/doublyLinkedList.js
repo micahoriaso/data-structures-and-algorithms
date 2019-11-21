@@ -23,7 +23,8 @@ export class LinkedList {
         head ===> | 3 | ====> tail (null)
         head ===> | 2 | <===> | 3 | ===> tail (null)
     */
-    addFirst = node => {
+    addFirst = value => {
+        const node = new Node(value);
 
         const tempNode = this.head;
         this.head = node;
@@ -47,7 +48,9 @@ export class LinkedList {
         head ===> | 3 | ====> tail (null)
         head ===> | 3 | <===> | 2 | ===> tail (null)
     */
-    addLast = node => {
+    addLast = value => {
+
+        const node = new Node(value);
 
         this.size === 0 ? this.head = this.tail = node : this.tail.next = node;
         this.tail.next = node;
@@ -71,7 +74,12 @@ export class LinkedList {
     */
     removeFirst = () => {
 
+        let tempNode;
+
         if (this.size === 0) return;
+
+        tempNode = this.head;
+
         this.head = this.head.next;
         this.size --;
 
@@ -80,6 +88,8 @@ export class LinkedList {
         } else {
             this.head.previous = null; //reset previous to null
         }
+
+        return tempNode;
  
     }
 
@@ -96,14 +106,24 @@ export class LinkedList {
         head ===> | 2 | ===============> tail (null)
     */
     removeLast = () => {
+
+        let tempNode;
+
         if (this.size === 0) return;
+
+        tempNode = this.tail;
+
         if (this.size === 1) this.head = this.tail = null;
+
+
         else {
+            
             this.tail = this.tail.previous;
             this.tail.next =  null;
         }
         this.size --;
 
+        return tempNode;
     }
 
     /*
@@ -126,7 +146,9 @@ export class LinkedList {
         head ===> | 2 | <===> | 3 | <===> | 4 | ===> tail (null)
         head ===> | 2 | <===============> | 4 | ===> tail (null)
     */
-    removeByValue = node => {
+    removeByValue = value => {
+
+        const node = new Node(value);
 
         // case 1
         if (this.size === 0) return;
