@@ -89,7 +89,7 @@ export class LinkedList {
             this.head.previous = null; //reset previous to null
         }
 
-        return tempNode;
+        return tempNode.value;
  
     }
 
@@ -123,7 +123,7 @@ export class LinkedList {
         }
         this.size --;
 
-        return tempNode;
+        return tempNode.value;
     }
 
     /*
